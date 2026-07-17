@@ -11,7 +11,7 @@ export const COMPANY = {
 export const SITE_URL = `https://${COMPANY.domain}`;
 
 export function bookingUrl(content: string): string {
-  return `#évaluation?source=${encodeURIComponent(content)}`;
+  return `#evaluation?source=${encodeURIComponent(content)}`;
 }
 
 export const HERO_COPY = {
@@ -162,7 +162,7 @@ export const KNOWLEDGE_BASE = [
 ];
 
 // Compatibility exports kept for copied components that may be reused later.
-export const BOOKING_URL = "#évaluation";
+export const BOOKING_URL = "#evaluation";
 export const FEATURES = SERVICES.map((service, index) => ({
   id: service.id,
   label: `${String(index + 1).padStart(2, "0")} - ${service.label}`,

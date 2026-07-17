@@ -27,6 +27,7 @@ export default function LandingCopilot() {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showLauncher, setShowLauncher] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       role: "assistant",
@@ -35,6 +36,20 @@ export default function LandingCopilot() {
   ]);
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const vid = useMemo(() => visitorId(), []);
+
+  useEffect(() => {
+    const update = () => {
+      const desktop = window.matchMedia("(min-width: 768px)").matches;
+      setShowLauncher(desktop || window.scrollY > 420);
+    };
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, []);
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
@@ -150,13 +165,15 @@ export default function LandingCopilot() {
         </div>
       )}
 
-      <button
-        type="button"
-        onClick={() => setOpen((value) => !value)}
-        className="rounded-lg bg-brand-600 px-5 py-3 text-sm font-semibold text-white shadow-[0_16px_50px_rgba(63,148,168,0.35)] transition hover:-translate-y-0.5 hover:bg-brand-700"
-      >
-        {open ? "Fermer" : "Chat KGM"}
-      </button>
+      {(showLauncher || open) && (
+        <button
+          type="button"
+          onClick={() => setOpen((value) => !value)}
+          className="rounded-lg bg-brand-600 px-5 py-3 text-sm font-semibold text-white shadow-[0_16px_50px_rgba(63,148,168,0.35)] transition hover:-translate-y-0.5 hover:bg-brand-700"
+        >
+          {open ? "Fermer" : "Chat KGM"}
+        </button>
+      )}
     </div>
   );
 }

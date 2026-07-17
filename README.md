@@ -7,7 +7,7 @@ Refonte Next.js du site KGM Soins, basee sur le systeme UI/UX Aurex mais adapté
 - Next.js App Router
 - Tailwind CSS
 - Framer Motion, GSAP, Lenis
-- Three.js hero animation
+- Mobile-first animated service request preview
 - Supabase REST pour les demandes d'évaluation et les messages du chatbot
 
 ## Assets

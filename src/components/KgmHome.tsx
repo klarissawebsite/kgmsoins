@@ -1,7 +1,6 @@
 "use client";
 
 import { FormEvent, useEffect, useRef, useState } from "react";
-import dynamic from "next/dynamic";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { gsap } from "gsap";
@@ -18,10 +17,6 @@ import {
   WHY_POINTS,
 } from "@/lib/config";
 import { useIsMobile, usePrefersReducedMotion } from "@/lib/hooks";
-import { heroScroll } from "@/lib/heroScroll";
-
-const SceneCanvas = dynamic(() => import("@/components/three/SceneCanvas"), { ssr: false });
-const PlasmaOrb = dynamic(() => import("@/components/three/PlasmaOrb"), { ssr: false });
 
 type Status = "idle" | "sending" | "sent" | "error";
 
@@ -71,6 +66,103 @@ function SectionTitle({
   );
 }
 
+const requestSteps = [
+  {
+    role: "Famille",
+    text: "Bonjour, je cherche de l'aide pour ma tante après son retour à domicile.",
+    align: "left",
+  },
+  {
+    role: "KGM Soins",
+    text: "Bien sûr. Est-ce surtout pour l'accompagnement, les soins infirmiers ou la convalescence ?",
+    align: "right",
+  },
+  {
+    role: "Famille",
+    text: "Elle vit seule et se déplace difficilement. Une évaluation aiderait beaucoup.",
+    align: "left",
+  },
+  {
+    role: "KGM Soins",
+    text: "Demande reçue. On vous oriente vers le bon service avec une évaluation gratuite.",
+    align: "right",
+  },
+] as const;
+
+function ServiceRequestAnimation() {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 28, scale: 0.98 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ duration: 0.8, delay: 0.75, ease: [0.22, 1, 0.36, 1] }}
+      className="relative mx-auto w-full max-w-[360px] lg:mx-0"
+      aria-label="Simulation de demande de service à domicile"
+    >
+      <motion.div
+        aria-hidden
+        className="absolute -inset-4 rounded-[2rem] bg-gradient-to-br from-brand-100/80 via-white/30 to-sage-100/80 blur-2xl"
+        animate={{ opacity: [0.55, 0.85, 0.55], scale: [0.98, 1.03, 0.98] }}
+        transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <div className="relative overflow-hidden rounded-[1.6rem] border border-white/80 bg-white/88 p-3 shadow-[0_24px_70px_rgba(23,49,58,0.18)] backdrop-blur-xl">
+        <div className="flex items-center justify-between rounded-[1.2rem] bg-paper-soft px-4 py-3">
+          <div>
+            <p className="font-body text-[11px] uppercase tracking-[0.2em] text-brand-700">Évaluation</p>
+            <p className="mt-1 font-display text-sm font-semibold text-night">KGM Soins</p>
+          </div>
+          <motion.div
+            className="h-3 w-3 rounded-full bg-sage-400"
+            animate={{ scale: [1, 1.45, 1], opacity: [0.8, 1, 0.8] }}
+            transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+          />
+        </div>
+
+        <div className="space-y-3 px-1 py-5">
+          {requestSteps.map((step, index) => (
+            <motion.div
+              key={`${step.role}-${step.text}`}
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: [0, 1, 1], y: [14, 0, 0] }}
+              transition={{
+                duration: 4.8,
+                delay: index * 0.75,
+                repeat: Infinity,
+                repeatDelay: 1.2,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className={`flex ${step.align === "right" ? "justify-end" : "justify-start"}`}
+            >
+              <div
+                className={`max-w-[86%] rounded-2xl px-4 py-3 ${
+                  step.align === "right"
+                    ? "bg-brand-600 text-white"
+                    : "border border-brand-100 bg-paper text-night"
+                }`}
+              >
+                <p className={`font-body text-[10px] uppercase tracking-[0.16em] ${step.align === "right" ? "text-white/70" : "text-brand-700"}`}>
+                  {step.role}
+                </p>
+                <p className="mt-1 font-body text-sm leading-relaxed">{step.text}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-[1fr_auto] items-center gap-3 rounded-[1.1rem] border border-brand-100 bg-white px-4 py-3">
+          <p className="truncate font-body text-sm text-night-faint">Décrire la situation...</p>
+          <motion.span
+            className="flex h-9 w-9 items-center justify-center rounded-full bg-sage-500 text-sm font-semibold text-white"
+            animate={{ x: [0, 2, 0] }}
+            transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
+          >
+            →
+          </motion.span>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
 export default function KgmHome() {
   const isMobile = useIsMobile();
   const reduced = usePrefersReducedMotion();
@@ -93,12 +185,6 @@ export default function KgmHome() {
           end: "+=65%",
           pin: true,
           scrub: 0.7,
-          onUpdate: (self) => {
-            heroScroll.progress = self.progress;
-          },
-          onLeaveBack: () => {
-            heroScroll.progress = 0;
-          },
         },
       });
       tl.to(copy, { yPercent: -8, autoAlpha: 0, filter: "blur(6px)", ease: "none" }, 0);
@@ -111,7 +197,6 @@ export default function KgmHome() {
       window.clearTimeout(settle);
       window.removeEventListener("load", refresh);
       ctx.revert();
-      heroScroll.progress = 0;
     };
   }, [isMobile, reduced]);
 
@@ -147,14 +232,11 @@ export default function KgmHome() {
           className="object-cover object-[68%_center]"
         />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(251,252,250,0.96)_0%,rgba(251,252,250,0.82)_38%,rgba(251,252,250,0.18)_72%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(251,252,250,0.78)_0%,rgba(251,252,250,0.38)_42%,rgba(251,252,250,0.94)_100%)] md:hidden" />
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-paper to-transparent" />
-        <div className="pointer-events-none absolute -right-[12vmin] top-[18%] h-[52vmin] w-[52vmin] opacity-70">
-          <SceneCanvas cameraZ={6.6} effects={false}>
-            <PlasmaOrb />
-          </SceneCanvas>
-        </div>
 
-        <div ref={heroCopyRef} className="relative z-10 mx-auto flex min-h-[82svh] w-full max-w-7xl flex-col justify-center px-6 md:px-10">
+        <div ref={heroCopyRef} className="relative z-10 mx-auto grid min-h-[82svh] w-full max-w-7xl grid-cols-1 items-center gap-10 px-6 pb-16 pt-8 md:px-10 lg:grid-cols-[minmax(0,1fr)_390px] lg:gap-14">
+          <div>
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -163,7 +245,7 @@ export default function KgmHome() {
           >
             {HERO_COPY.eyebrow}
           </motion.p>
-          <h1 className="mt-5 max-w-4xl font-display text-5xl font-semibold leading-[1.03] tracking-tight text-night sm:text-6xl md:text-7xl lg:text-8xl">
+          <h1 className="mt-5 max-w-4xl font-display text-4xl font-semibold leading-[1.04] tracking-tight text-night sm:text-5xl md:text-6xl lg:text-7xl">
             <motion.span
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -193,9 +275,9 @@ export default function KgmHome() {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.9 }}
-            className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center"
+            className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
           >
-            <MagneticButton href="#évaluation">Demander une évaluation gratuite</MagneticButton>
+            <MagneticButton href="#evaluation">Demander une évaluation gratuite</MagneticButton>
             <a
               href="#services"
               className="rounded-full border border-night/15 bg-white/70 px-6 py-3 text-center font-display text-sm font-medium text-night backdrop-blur transition hover:border-brand-300 hover:text-brand-700"
@@ -203,6 +285,9 @@ export default function KgmHome() {
               Voir les services
             </a>
           </motion.div>
+          </div>
+
+          <ServiceRequestAnimation />
         </div>
       </section>
 
@@ -250,7 +335,7 @@ export default function KgmHome() {
               >
                 <div className="flex items-start justify-between gap-5">
                   <h3 className="font-display text-2xl font-semibold text-night">{service.title}</h3>
-                  <span className="shrink-0 rounded-full bg-sâge-100 px-3 py-1 font-body text-xs font-semibold text-sâge-600">
+                  <span className="shrink-0 rounded-full bg-sage-100 px-3 py-1 font-body text-xs font-semibold text-sage-600">
                     {service.label}
                   </span>
                 </div>
@@ -324,9 +409,9 @@ export default function KgmHome() {
               <p className="font-body text-xs uppercase tracking-[0.22em] text-brand-600">Soins infirmiers</p>
               <p className="mt-5 font-display text-4xl font-semibold text-night">A partir de 60 $</p>
             </div>
-            <div className="rounded-lg border border-sâge-200 bg-sâge-50 p-7 shadow-card sm:col-span-2">
+            <div className="rounded-lg border border-sage-200 bg-sage-50 p-7 shadow-card sm:col-span-2">
               <p className="font-display text-2xl font-semibold text-night">Forfaits personnalisés</p>
-              <p className="mt-2 font-body text-sm uppercase tracking-[0.22em] text-sâge-600">Bientôt disponibles</p>
+              <p className="mt-2 font-body text-sm uppercase tracking-[0.22em] text-sage-600">Bientôt disponibles</p>
               <p className="mt-5 font-body text-sm leading-relaxed text-night-muted">
                 Les tarifs varient selon les besoins. Une évaluation telephonique gratuite permet de vous orienter vers le service le plus adapté.
               </p>
@@ -335,7 +420,7 @@ export default function KgmHome() {
         </div>
       </section>
 
-      <section id="évaluation" className="relative w-full py-24 md:py-32">
+      <section id="evaluation" className="relative w-full py-24 md:py-32">
         <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-12 px-6 md:grid-cols-[0.85fr_1.15fr] md:px-10">
           <SectionTitle
             eyebrow="Parlons de vos besoins"
@@ -351,7 +436,7 @@ export default function KgmHome() {
           >
             {status === "sent" ? (
               <div className="flex min-h-80 flex-col items-center justify-center text-center">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-sâge-100 font-display text-lg text-sâge-600">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-sage-100 font-display text-lg text-sage-600">
                   OK
                 </div>
                 <h3 className="mt-5 font-display text-2xl font-semibold text-night">Votre demande a ete reçue.</h3>
@@ -376,7 +461,7 @@ export default function KgmHome() {
                       <option>Autre proche</option>
                     </select>
                   </Field>
-                  <Field name="person_âge" label="Quel âge a la personne ?" type="number" required />
+                  <Field name="person_age" label="Quel âge a la personne ?" type="number" required />
                 </div>
                 <Field name="primary_need" label="Quel est votre principal besoin ?">
                   <select name="primary_need" required className={inputCls} defaultValue="">

@@ -24,7 +24,7 @@ export default function Footer() {
         <div>
           <p className="font-body text-xs uppercase tracking-[0.22em] text-white/45">Recherche</p>
           <p className="mt-4 font-body text-sm leading-relaxed text-white/60">{SEO_TERMS.join(", ")}</p>
-          <a href="#évaluation" className="mt-5 inline-block rounded-full bg-white px-5 py-2 font-display text-sm font-semibold text-night">
+          <a href="#evaluation" className="mt-5 inline-block rounded-full bg-white px-5 py-2 font-display text-sm font-semibold text-night">
             Évaluation gratuite
           </a>
         </div>

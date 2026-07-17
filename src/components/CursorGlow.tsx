@@ -16,7 +16,7 @@ export default function CursorGlow() {
   const sy = useSpring(y, { stiffness: 120, damping: 30, mass: 0.6 });
 
   useEffect(() => {
-    if (window.matchMedia("(pointer: coarse)").matches) return;
+    if (window.matchMedia("(pointer: coarse), (max-width: 767px)").matches) return;
     setEnabled(true);
     const move = (e: PointerEvent) => {
       x.set(e.clientX);
@@ -40,7 +40,7 @@ export default function CursorGlow() {
           width: 620,
           height: 620,
           background:
-            "radial-gradient(circle, rgba(124,92,255,0.12) 0%, rgba(168,139,250,0.06) 40%, transparent 70%)",
+            "radial-gradient(circle, rgba(63,148,168,0.12) 0%, rgba(116,164,110,0.07) 40%, transparent 70%)",
         }}
       />
     </motion.div>
