@@ -17,7 +17,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "KGM Soins | Soins à domicile a Montréal",
+  title: "KGM Soins | Soins à domicile à Montréal",
   description:
     "Soins infirmiers et accompagnement à domicile pour personnes âgées, personnes en perte d’autonomie, proches aidants et convalescence a Montréal.",
   metadataBase: new URL("https://kgmsoins.com"),
