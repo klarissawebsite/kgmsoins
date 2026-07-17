@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 
 /**
@@ -63,9 +64,20 @@ export default function Preloader() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="font-display text-2xl font-semibold tracking-[0.45em] text-night"
+            className="flex flex-col items-center gap-4"
           >
-            KGM SOINS
+            <Image
+              src="/assets/kgm-logo.png"
+              alt=""
+              width={467}
+              height={534}
+              priority
+              sizes="96px"
+              className="h-24 w-[5.25rem] object-contain sm:h-28 sm:w-[6.125rem]"
+            />
+            <span className="font-display text-xl font-semibold tracking-[0.35em] text-night sm:text-2xl">
+              KGM SOINS
+            </span>
           </motion.div>
           <div className="mt-7 h-px w-52 overflow-hidden bg-night/10">
             <div

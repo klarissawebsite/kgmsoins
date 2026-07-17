@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import SoundToggle from "@/components/SoundToggle";
 
@@ -35,10 +36,16 @@ export default function Nav() {
     >
       <nav className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-4 md:px-10">
         <a href="#top" className="flex items-center gap-3" aria-label="KGM Soins accueil">
-          <span className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-600 font-display text-sm font-semibold text-white shadow-glow-sm">
-            KGM
-          </span>
-          <span className="font-display text-lg font-semibold tracking-tight text-night">KGM Soins</span>
+          <Image
+            src="/assets/kgm-logo.png"
+            alt=""
+            width={467}
+            height={534}
+            priority
+            sizes="48px"
+            className="h-11 w-10 shrink-0 object-contain sm:h-12 sm:w-11"
+          />
+          <span className="font-display text-base font-semibold tracking-tight text-night sm:text-lg">KGM Soins</span>
         </a>
 
         <div className="flex items-center gap-3">
