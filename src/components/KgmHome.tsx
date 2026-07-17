@@ -7,6 +7,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import MagneticButton from "@/components/ui/MagneticButton";
 import { RevealText } from "@/components/ui/RevealText";
+import ServiceRequestAnimation from "@/components/ServiceRequestAnimation";
 import {
   COMPANY,
   FAQ_ITEMS,
@@ -63,103 +64,6 @@ function SectionTitle({
       </h2>
       {copy && <p className="mt-5 font-body text-base leading-relaxed text-night-muted sm:text-lg">{copy}</p>}
     </div>
-  );
-}
-
-const requestSteps = [
-  {
-    role: "Famille",
-    text: "Bonjour, je cherche de l'aide pour ma tante après son retour à domicile.",
-    align: "left",
-  },
-  {
-    role: "KGM Soins",
-    text: "Bien sûr. Est-ce surtout pour l'accompagnement, les soins infirmiers ou la convalescence ?",
-    align: "right",
-  },
-  {
-    role: "Famille",
-    text: "Elle vit seule et se déplace difficilement. Une évaluation aiderait beaucoup.",
-    align: "left",
-  },
-  {
-    role: "KGM Soins",
-    text: "Demande reçue. On vous oriente vers le bon service avec une évaluation gratuite.",
-    align: "right",
-  },
-] as const;
-
-function ServiceRequestAnimation() {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 28, scale: 0.98 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: 0.8, delay: 0.75, ease: [0.22, 1, 0.36, 1] }}
-      className="relative mx-auto w-full max-w-[360px] lg:mx-0"
-      aria-label="Simulation de demande de service à domicile"
-    >
-      <motion.div
-        aria-hidden
-        className="absolute -inset-4 rounded-[2rem] bg-gradient-to-br from-brand-100/80 via-white/30 to-sage-100/80 blur-2xl"
-        animate={{ opacity: [0.55, 0.85, 0.55], scale: [0.98, 1.03, 0.98] }}
-        transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <div className="relative overflow-hidden rounded-[1.6rem] border border-white/80 bg-white/88 p-3 shadow-[0_24px_70px_rgba(23,49,58,0.18)] backdrop-blur-xl">
-        <div className="flex items-center justify-between rounded-[1.2rem] bg-paper-soft px-4 py-3">
-          <div>
-            <p className="font-body text-[11px] uppercase tracking-[0.2em] text-brand-700">Évaluation</p>
-            <p className="mt-1 font-display text-sm font-semibold text-night">KGM Soins</p>
-          </div>
-          <motion.div
-            className="h-3 w-3 rounded-full bg-sage-400"
-            animate={{ scale: [1, 1.45, 1], opacity: [0.8, 1, 0.8] }}
-            transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-          />
-        </div>
-
-        <div className="space-y-3 px-1 py-5">
-          {requestSteps.map((step, index) => (
-            <motion.div
-              key={`${step.role}-${step.text}`}
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: [0, 1, 1], y: [14, 0, 0] }}
-              transition={{
-                duration: 4.8,
-                delay: index * 0.75,
-                repeat: Infinity,
-                repeatDelay: 1.2,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-              className={`flex ${step.align === "right" ? "justify-end" : "justify-start"}`}
-            >
-              <div
-                className={`max-w-[86%] rounded-2xl px-4 py-3 ${
-                  step.align === "right"
-                    ? "bg-brand-600 text-white"
-                    : "border border-brand-100 bg-paper text-night"
-                }`}
-              >
-                <p className={`font-body text-[10px] uppercase tracking-[0.16em] ${step.align === "right" ? "text-white/70" : "text-brand-700"}`}>
-                  {step.role}
-                </p>
-                <p className="mt-1 font-body text-sm leading-relaxed">{step.text}</p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        <div className="grid grid-cols-[1fr_auto] items-center gap-3 rounded-[1.1rem] border border-brand-100 bg-white px-4 py-3">
-          <p className="truncate font-body text-sm text-night-faint">Décrire la situation...</p>
-          <motion.span
-            className="flex h-9 w-9 items-center justify-center rounded-full bg-sage-500 text-sm font-semibold text-white"
-            animate={{ x: [0, 2, 0] }}
-            transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
-          >
-            →
-          </motion.span>
-        </div>
-      </div>
-    </motion.div>
   );
 }
 
@@ -235,8 +139,7 @@ export default function KgmHome() {
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(251,252,250,0.78)_0%,rgba(251,252,250,0.38)_42%,rgba(251,252,250,0.94)_100%)] md:hidden" />
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-paper to-transparent" />
 
-        <div ref={heroCopyRef} className="relative z-10 mx-auto grid min-h-[82svh] w-full max-w-7xl grid-cols-1 items-center gap-10 px-6 pb-16 pt-8 md:px-10 lg:grid-cols-[minmax(0,1fr)_390px] lg:gap-14">
-          <div>
+        <div ref={heroCopyRef} className="relative z-10 mx-auto flex min-h-[82svh] w-full max-w-7xl flex-col justify-center px-6 pb-16 pt-8 md:px-10">
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -285,8 +188,16 @@ export default function KgmHome() {
               Voir les services
             </a>
           </motion.div>
-          </div>
+        </div>
+      </section>
 
+      <section id="demande" className="relative w-full overflow-hidden bg-paper-soft py-20 md:py-28">
+        <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 px-6 md:grid-cols-[0.95fr_1.05fr] md:px-10">
+          <SectionTitle
+            eyebrow="Une demande simple"
+            title="Un proche peut expliquer la situation en quelques messages."
+            copy="La première conversation sert à comprendre le contexte, rassurer la famille et orienter vers une évaluation gratuite, sans transformer la démarche en formulaire lourd."
+          />
           <ServiceRequestAnimation />
         </div>
       </section>
@@ -296,7 +207,7 @@ export default function KgmHome() {
           <SectionTitle
             eyebrow="Pourquoi KGM Soins ?"
             title="Préserver la dignité, l'autonomie et la qualité de vie."
-            copy="Chez KGM Soins, recevoir des soins à domicile signifie aussi être écoûte, rassuré et accompagne avec respect. Chaque intervention soutient autant la personne que sa famille."
+            copy="Chez KGM Soins, recevoir des soins à domicile signifie aussi être écouté, rassuré et accompagné avec respect. Chaque intervention soutient autant la personne que sa famille."
           />
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {WHY_POINTS.map((point, index) => (
@@ -320,8 +231,8 @@ export default function KgmHome() {
         <div className="mx-auto w-full max-w-7xl px-6 md:px-10">
           <SectionTitle
             eyebrow="Nos services"
-            title="Quatre facons d'aider une personne a rester chez elle en sécurité."
-            copy="Les services sont presentes simplement pour vous orienter. L'évaluation gratuite sert a confirmer le niveau d'aide le plus adapté."
+            title="Quatre façons d'aider une personne à rester chez elle en sécurité."
+            copy="Les services sont présentés simplement pour vous orienter. L'évaluation gratuite sert à confirmer le niveau d'aide le plus adapté."
           />
           <div className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2">
             {SERVICES.map((service, index) => (
@@ -374,14 +285,14 @@ export default function KgmHome() {
           <div>
             <SectionTitle
               eyebrow="Notre expertise"
-              title="Une experience clinique mise au service du maintien à domicile."
-              copy="KGM Soins met l'accent sur l'évaluation, la prevention, la sécurité et la relation humaine. L'objectif n'est pas seulement de realiser un soin, mais de rendre le quotidien plus stable et plus rassurant."
+              title="Une expérience clinique mise au service du maintien à domicile."
+              copy="KGM Soins met l'accent sur l'évaluation, la prévention, la sécurité et la relation humaine. L'objectif n'est pas seulement de réaliser un soin, mais de rendre le quotidien plus stable et plus rassurant."
             />
             <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
               {[
-                ["24/7", "Disponibilité indiquee publiquement"],
+                ["24/7", "Disponibilité indiquée publiquement"],
                 ["4", "Catégories de services claires"],
-                ["0 $", "Évaluation telephonique"],
+                ["0 $", "Évaluation téléphonique"],
               ].map(([value, label]) => (
                 <div key={label} className="border-t border-brand-100 pt-5">
                   <p className="font-display text-3xl font-semibold text-brand-700">{value}</p>
@@ -397,23 +308,23 @@ export default function KgmHome() {
         <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-10 px-6 md:grid-cols-[0.9fr_1.1fr] md:px-10">
           <SectionTitle
             eyebrow="Tarifs"
-            title="Des tarifs de depart, puis une orientation adaptée."
-            copy="Nous evitons les grilles rigides parce que chaque situation familiale, clinique et quotidienne est differente."
+            title="Des tarifs de départ, puis une orientation adaptée."
+            copy="Nous évitons les grilles rigides parce que chaque situation familiale, clinique et quotidienne est différente."
           />
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
             <div className="rounded-lg border border-brand-100 bg-white p-7 shadow-card">
               <p className="font-body text-xs uppercase tracking-[0.22em] text-brand-600">Accompagnement</p>
-              <p className="mt-5 font-display text-4xl font-semibold text-night">A partir de 40 $/heure</p>
+              <p className="mt-5 font-display text-4xl font-semibold text-night">À partir de 40 $/heure</p>
             </div>
             <div className="rounded-lg border border-brand-100 bg-white p-7 shadow-card">
               <p className="font-body text-xs uppercase tracking-[0.22em] text-brand-600">Soins infirmiers</p>
-              <p className="mt-5 font-display text-4xl font-semibold text-night">A partir de 60 $</p>
+              <p className="mt-5 font-display text-4xl font-semibold text-night">À partir de 60 $</p>
             </div>
             <div className="rounded-lg border border-sage-200 bg-sage-50 p-7 shadow-card sm:col-span-2">
               <p className="font-display text-2xl font-semibold text-night">Forfaits personnalisés</p>
               <p className="mt-2 font-body text-sm uppercase tracking-[0.22em] text-sage-600">Bientôt disponibles</p>
               <p className="mt-5 font-body text-sm leading-relaxed text-night-muted">
-                Les tarifs varient selon les besoins. Une évaluation telephonique gratuite permet de vous orienter vers le service le plus adapté.
+                Les tarifs varient selon les besoins. Une évaluation téléphonique gratuite permet de vous orienter vers le service le plus adapté.
               </p>
             </div>
           </div>
@@ -439,7 +350,7 @@ export default function KgmHome() {
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-sage-100 font-display text-lg text-sage-600">
                   OK
                 </div>
-                <h3 className="mt-5 font-display text-2xl font-semibold text-night">Votre demande a ete reçue.</h3>
+                <h3 className="mt-5 font-display text-2xl font-semibold text-night">Votre demande a été reçue.</h3>
                 <p className="mt-3 max-w-md font-body text-sm leading-relaxed text-night-muted">
                   Merci. KGM Soins pourra vous recontacter pour compléter l&apos;évaluation et confirmer le service le plus adapté.
                 </p>
@@ -447,7 +358,7 @@ export default function KgmHome() {
             ) : (
               <form onSubmit={onSubmit} className="space-y-5">
                 <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-                  <Field name="full_name" label="Nom et prenom" required />
+                  <Field name="full_name" label="Nom et prénom" required />
                   <Field name="phone" label="Téléphone" type="tel" required />
                 </div>
                 <Field name="email" label="Courriel" type="email" required />
@@ -472,7 +383,7 @@ export default function KgmHome() {
                 <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                   {[
                     ["lives_alone", "La personne vit-elle seule ?"],
-                    ["mobility_difficulty", "A-t-elle des difficultés a se déplacer ?"],
+                    ["mobility_difficulty", "A-t-elle des difficultés à se déplacer ?"],
                     ["caregiver_present", "Y a-t-il un proche aidant ?"],
                     ["medical_order", "Ordonnance médicale pour soins infirmiers ?"],
                   ].map(([name, label]) => (

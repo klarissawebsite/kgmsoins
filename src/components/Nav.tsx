@@ -7,6 +7,7 @@ import SoundToggle from "@/components/SoundToggle";
 const links = [
   { href: "#pourquoi", label: "Pourquoi" },
   { href: "#services", label: "Services" },
+  { href: "#demande", label: "Demande" },
   { href: "#tarifs", label: "Tarifs" },
   { href: "#contact", label: "Contact" },
 ];

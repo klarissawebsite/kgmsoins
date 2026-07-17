@@ -40,7 +40,7 @@ export default function LandingCopilot() {
   useEffect(() => {
     const update = () => {
       const desktop = window.matchMedia("(min-width: 768px)").matches;
-      setShowLauncher(desktop || window.scrollY > 420);
+      setShowLauncher(desktop);
     };
     update();
     window.addEventListener("scroll", update, { passive: true });
