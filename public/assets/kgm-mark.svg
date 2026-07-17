@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">KGM Soins</title>
+  <desc id="desc">Marque circulaire douce avec les initiales KGM</desc>
+  <rect width="512" height="512" rx="128" fill="#FBFCFA"/>
+  <circle cx="256" cy="256" r="172" fill="#D9EEF2"/>
+  <path d="M154 277c50 67 154 66 204-1 11-15 31-15 43-1 12 15 12 36 0 51-73 93-217 93-290 1-13-16-13-37 0-52 12-14 32-14 43 2Z" fill="#74A46E"/>
+  <path d="M162 182c0-26 21-47 47-47 21 0 39 14 45 33 6-19 24-33 45-33 26 0 47 21 47 47 0 59-92 107-92 107s-92-48-92-107Z" fill="#3F94A8"/>
+  <text x="256" y="384" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="58" font-weight="700" fill="#17313A">KGM</text>
+</svg>

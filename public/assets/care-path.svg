@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">Parcours de soins a domicile</title>
+  <desc id="desc">Accent abstrait representant un parcours calme et accompagne</desc>
+  <path d="M60 296C194 116 318 377 466 192C604 20 720 276 858 151C966 53 1056 116 1140 49" stroke="#BFD8B9" stroke-width="28" stroke-linecap="round"/>
+  <path d="M60 296C194 116 318 377 466 192C604 20 720 276 858 151C966 53 1056 116 1140 49" stroke="#3F94A8" stroke-width="5" stroke-linecap="round" stroke-dasharray="2 28"/>
+  <circle cx="60" cy="296" r="34" fill="#D9EEF2"/>
+  <circle cx="466" cy="192" r="34" fill="#DDEAE4"/>
+  <circle cx="858" cy="151" r="34" fill="#D9EEF2"/>
+  <circle cx="1140" cy="49" r="34" fill="#DDEAE4"/>
+</svg>

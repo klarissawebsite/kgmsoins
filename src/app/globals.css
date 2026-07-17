@@ -1,0 +1,141 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #07070f;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* `clip` (not `hidden`) prevents horizontal scroll WITHOUT creating a
+     scroll container — `hidden` here would break every position:sticky. */
+  overflow-x: clip;
+}
+
+body {
+  font-family: var(--font-inter), system-ui, sans-serif;
+}
+
+/* Lenis smooth scroll */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Selection */
+::selection {
+  background: #3f94a8;
+  color: #fff;
+}
+
+/* Thin scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #c4b5fd;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #a78bfa;
+}
+
+/* Reusable gradient text */
+.text-gradient {
+  background: linear-gradient(135deg, #3f94a8 0%, #74a46e 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Faint dotted grid background */
+.dot-grid {
+  background-image: radial-gradient(circle, #1c1c33 1px, transparent 1px);
+  background-size: 36px 36px;
+}
+
+/* Subtle radial vignette */
+.vignette {
+  background: radial-gradient(
+    ellipse at center,
+    transparent 0%,
+    rgba(7, 7, 15, 0.6) 70%,
+    #07070f 100%
+  );
+}
+
+/* Sound-toggle equalizer bars */
+@keyframes soundbar {
+  0%, 100% { height: 3px; }
+  50% { height: 12px; }
+}
+.animate-soundbar {
+  animation: soundbar 0.8s ease-in-out infinite;
+}
+
+/* ───────────────────────── Light theme (marketing homepage) ─────────────────────────
+   Scoped to a .theme-light wrapper so the dark /preview demo route is untouched. */
+.theme-light {
+  background: #fbfcfa;
+  color: #17313a;
+}
+.theme-light ::selection {
+  background: #3f94a8;
+  color: #fff;
+}
+/* Violet gradient text on light */
+.theme-light .text-gradient {
+  background: linear-gradient(118deg, #2f7688 0%, #3f94a8 52%, #74a46e 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+/* Violet dotted grid for light sections */
+.dot-grid-light {
+  background-image: radial-gradient(circle, rgba(63, 148, 168, 0.16) 1px, transparent 1px);
+  background-size: 34px 34px;
+}
+/* Frosted glass card surface for light theme */
+.glass-light {
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(63, 148, 168, 0.14);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+/* Soft conic/linear sheen used on the light hero halo */
+.brand-halo {
+  background: radial-gradient(
+    closest-side,
+    rgba(63, 148, 168, 0.34) 0%,
+    rgba(116, 164, 110, 0.24) 45%,
+    transparent 78%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
