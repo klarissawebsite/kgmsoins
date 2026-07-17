@@ -10,7 +10,7 @@ export function organizationSchema() {
     openingHours: "Mo-Su 00:00-23:59",
     image: `${SITE_URL}/assets/kgm-hero-home-care.png`,
     description:
-      "Soins infirmiers et accompagnement a domicile pour personnes agees, proches aidants, personnes en perte d'autonomie et convalescence a Montreal.",
+      "Soins infirmiers et accompagnement à domicile pour personnes âgées, proches aidants, personnes en perte d’autonomie et convalescence a Montréal.",
   };
 }
 
@@ -18,10 +18,10 @@ export function serviceSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "Service",
-    name: "Soins a domicile Montreal",
+    name: "Soins à domicile Montréal",
     provider: { "@type": "LocalBusiness", name: COMPANY.name, url: SITE_URL },
     areaServed: COMPANY.region,
-    serviceType: "Soins infirmiers a domicile, maintien a domicile, accompagnement et convalescence",
+    serviceType: "Soins infirmiers à domicile, maintien à domicile, accompagnement et convalescence",
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Services KGM Soins",
@@ -37,7 +37,7 @@ export function serviceSchema() {
 export function faqSchema() {
   return {
     "@context": "https://schema.org",
-    "@type": "FAQPage",
+    "@type": "FAQPâge",
     mainEntity: FAQ_ITEMS.map((item) => ({
       "@type": "Question",
       name: item.q,

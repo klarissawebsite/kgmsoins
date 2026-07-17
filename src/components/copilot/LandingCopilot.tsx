@@ -30,7 +30,7 @@ export default function LandingCopilot() {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       role: "assistant",
-      content: "Bonjour. Je peux vous orienter sur les services, les tarifs de depart et l'evaluation gratuite.",
+      content: "Bonjour. Je peux vous orienter sur les services, les tarifs de départ et l'évaluation gratuite.",
     },
   ]);
   const scrollRef = useRef<HTMLDivElement | null>(null);
@@ -68,7 +68,7 @@ export default function LandingCopilot() {
         ...prev,
         {
           role: "assistant",
-          content: "Le clavardage est temporairement indisponible. Le formulaire d'evaluation gratuite reste la meilleure prochaine etape.",
+          content: "Le clavardage est temporairement indisponible. Le formulaire d'évaluation gratuite reste la meilleure prochaine étape.",
         },
       ]);
     } finally {
@@ -111,7 +111,7 @@ export default function LandingCopilot() {
                 </div>
               </div>
             ))}
-            {loading && <p className="px-2 text-xs text-brand-600">Reponse en cours...</p>}
+            {loading && <p className="px-2 text-xs text-brand-600">Réponse en cours...</p>}
           </div>
 
           <div className="shrink-0 flex flex-wrap gap-2 border-t border-brand-100 px-4 py-3">

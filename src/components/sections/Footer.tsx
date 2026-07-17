@@ -7,7 +7,7 @@ export default function Footer() {
         <div>
           <p className="font-display text-2xl font-semibold">{COMPANY.name}</p>
           <p className="mt-4 max-w-md font-body text-sm leading-relaxed text-white/70">
-            Soins a domicile, accompagnement et soutien au maintien a domicile pour les familles de Montreal et des environs.
+            Soins à domicile, accompagnement et soutien au maintien à domicile pour les familles de Montréal et des environs.
           </p>
           <p className="mt-4 font-body text-sm text-white/60">{COMPANY.hours}</p>
         </div>
@@ -24,13 +24,13 @@ export default function Footer() {
         <div>
           <p className="font-body text-xs uppercase tracking-[0.22em] text-white/45">Recherche</p>
           <p className="mt-4 font-body text-sm leading-relaxed text-white/60">{SEO_TERMS.join(", ")}</p>
-          <a href="#evaluation" className="mt-5 inline-block rounded-full bg-white px-5 py-2 font-display text-sm font-semibold text-night">
-            Evaluation gratuite
+          <a href="#évaluation" className="mt-5 inline-block rounded-full bg-white px-5 py-2 font-display text-sm font-semibold text-night">
+            Évaluation gratuite
           </a>
         </div>
       </div>
       <div className="border-t border-white/10 px-6 py-5 text-center font-body text-xs text-white/45">
-        © {new Date().getFullYear()} {COMPANY.name}. Tous droits reserves.
+        © {new Date().getFullYear()} {COMPANY.name}. Tous droits réservés.
       </div>
     </footer>
   );

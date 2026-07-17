@@ -17,22 +17,22 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "KGM Soins | Soins a domicile a Montreal",
+  title: "KGM Soins | Soins à domicile a Montréal",
   description:
-    "Soins infirmiers et accompagnement a domicile pour personnes agees, personnes en perte d'autonomie, proches aidants et convalescence a Montreal.",
+    "Soins infirmiers et accompagnement à domicile pour personnes âgées, personnes en perte d’autonomie, proches aidants et convalescence a Montréal.",
   metadataBase: new URL("https://kgmsoins.com"),
   keywords: [
-    "soins a domicile Montreal",
-    "infirmiere a domicile Montreal",
-    "maintien a domicile",
+    "soins à domicile Montréal",
+    "infirmière à domicile Montréal",
+    "maintien à domicile",
     "proche aidant",
     "convalescence",
-    "soins aux personnes agees",
+    "soins aux personnes âgées",
   ],
   openGraph: {
-    title: "KGM Soins | Des soins professionnels, une presence humaine",
+    title: "KGM Soins | Des soins professionnels, une présence humaine",
     description:
-      "Accompagnement et soins infirmiers a domicile pour favoriser le maintien a domicile en toute securite.",
+      "Accompagnement et soins infirmiers à domicile pour favoriser le maintien à domicile en toute sécurité.",
     type: "website",
     locale: "fr_CA",
     siteName: "KGM Soins",
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "KGM Soins",
-    description: "Soins a domicile et accompagnement humain a Montreal.",
+    description: "Soins à domicile et accompagnement humain a Montréal.",
     images: ["/assets/kgm-hero-home-care.png"],
   },
   robots: { index: true, follow: true },
