@@ -8,7 +8,7 @@ export function organizationSchema() {
     url: SITE_URL,
     areaServed: COMPANY.region,
     openingHours: "Mo-Su 00:00-23:59",
-    image: `${SITE_URL}/assets/kgm-hero-home-care.png`,
+    image: `${SITE_URL}/assets/kgm-hero-home-care.jpg`,
     description:
       "Soins infirmiers et accompagnement à domicile pour personnes âgées, proches aidants, personnes en perte d’autonomie et convalescence a Montréal.",
   };

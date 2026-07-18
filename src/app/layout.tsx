@@ -36,13 +36,13 @@ export const metadata: Metadata = {
     type: "website",
     locale: "fr_CA",
     siteName: "KGM Soins",
-    images: [{ url: "/assets/kgm-hero-home-care.png", width: 1792, height: 1024 }],
+    images: [{ url: "/assets/kgm-hero-home-care.jpg", width: 1600, height: 800 }],
   },
   twitter: {
     card: "summary_large_image",
     title: "KGM Soins",
     description: "Soins à domicile et accompagnement humain a Montréal.",
-    images: ["/assets/kgm-hero-home-care.png"],
+    images: ["/assets/kgm-hero-home-care.jpg"],
   },
   robots: { index: true, follow: true },
 };

@@ -91,7 +91,7 @@ export default function KgmHome() {
     <>
       <section id="accueil" className="relative min-h-[92svh] overflow-hidden pt-20">
         <Image
-          src="/assets/kgm-hero-home-care.png"
+          src="/assets/kgm-hero-home-care.jpg"
           alt="Soignante accompagnant une personne âgee à domicile"
           fill
           priority
@@ -238,7 +238,7 @@ export default function KgmHome() {
             className="relative aspect-[4/5] overflow-hidden rounded-lg shadow-card md:aspect-[5/6]"
           >
             <Image
-              src="/assets/kgm-accompagnement.png"
+              src="/assets/kgm-accompagnement.jpg"
               alt="Accompagnement securitaire à domicile"
               fill
               sizes="(min-width: 768px) 45vw, 100vw"
