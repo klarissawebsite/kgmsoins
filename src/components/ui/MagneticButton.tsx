@@ -25,6 +25,7 @@ export default function MagneticButton({
 }: Props) {
   const ref = useRef<HTMLAnchorElement>(null);
   const isMobile = useIsMobile();
+  const external = href ? /^https?:\/\//.test(href) : false;
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -53,8 +54,8 @@ export default function MagneticButton({
     <motion.a
       ref={ref}
       href={href}
-      target={href ? "_blank" : undefined}
-      rel={href ? "noopener noreferrer" : undefined}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noopener noreferrer" : undefined}
       onClick={onClick}
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}

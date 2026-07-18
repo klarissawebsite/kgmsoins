@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import SoundToggle from "@/components/SoundToggle";
 
 const links = [
   { href: "#pourquoi", label: "Pourquoi" },
@@ -30,11 +29,11 @@ export default function Nav() {
       transition={{ duration: 0.6, delay: 0.1 }}
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
         scrolled
-          ? "border-b border-night/5 bg-paper/82 backdrop-blur-md"
+          ? "border-b border-night/5 bg-paper/95 shadow-sm"
           : "border-b border-transparent bg-transparent"
       }`}
     >
-      <nav className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-4 md:px-10">
+      <nav className="mx-auto flex w-full max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6 md:px-10 md:py-4">
         <a href="#top" className="flex items-center gap-3" aria-label="KGM Soins accueil">
           <Image
             src="/assets/kgm-logo.png"
@@ -45,10 +44,12 @@ export default function Nav() {
             sizes="48px"
             className="h-11 w-10 shrink-0 object-contain sm:h-12 sm:w-11"
           />
-          <span className="font-display text-base font-semibold tracking-tight text-night sm:text-lg">KGM Soins</span>
+          <span className="font-display text-base font-semibold leading-tight tracking-tight text-night sm:text-lg">
+            KGM Soins
+          </span>
         </a>
 
-        <div className="flex items-center gap-3">
+        <div className="flex min-w-0 items-center gap-2 sm:gap-3">
           <div className="hidden items-center gap-6 pr-2 lg:flex">
             {links.map((link) => (
               <a
@@ -60,12 +61,11 @@ export default function Nav() {
               </a>
             ))}
           </div>
-          <SoundToggle />
           <a
             href="#evaluation"
-            className="rounded-full border border-night/15 bg-white/70 px-5 py-2 font-display text-sm font-medium text-night transition-all duration-300 hover:border-brand-400 hover:text-brand-700"
+            className="whitespace-nowrap rounded-full border border-night/15 bg-white/76 px-4 py-2.5 text-center font-display text-xs font-semibold leading-none text-night shadow-sm transition-colors duration-200 hover:border-brand-400 hover:text-brand-700 sm:px-5 sm:text-sm"
           >
-            Evaluation gratuite
+            Évaluation gratuite
           </a>
         </div>
       </nav>

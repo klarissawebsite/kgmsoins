@@ -32,7 +32,7 @@ export type Service = {
 export const SERVICES: Service[] = [
   {
     id: "soins-infirmiers",
-    label: "A partir de 60 $",
+    label: "À partir de 60 $",
     title: "Soins infirmiers à domicile",
     copy:
       "Des interventions professionnelles realisees dans le confort du domicile, avec attention, discretion et respect.",
@@ -56,7 +56,7 @@ export const SERVICES: Service[] = [
   },
   {
     id: "accompagnement",
-    label: "A partir de 40 $/heure",
+    label: "À partir de 40 $/heure",
     title: "Accompagnement et soutien",
     copy:
       "Une présence rassurante pour les rendez-vous, les soins d'hygiene et les moments ou la famille a besoin de relais.",

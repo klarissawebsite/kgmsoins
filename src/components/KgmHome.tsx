@@ -1,10 +1,8 @@
 "use client";
 
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { FormEvent, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import MagneticButton from "@/components/ui/MagneticButton";
 import { RevealText } from "@/components/ui/RevealText";
 import ServiceRequestAnimation from "@/components/ServiceRequestAnimation";
@@ -17,7 +15,6 @@ import {
   SERVICES,
   WHY_POINTS,
 } from "@/lib/config";
-import { useIsMobile, usePrefersReducedMotion } from "@/lib/hooks";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
@@ -68,41 +65,7 @@ function SectionTitle({
 }
 
 export default function KgmHome() {
-  const isMobile = useIsMobile();
-  const reduced = usePrefersReducedMotion();
-  const heroRef = useRef<HTMLElement | null>(null);
-  const heroCopyRef = useRef<HTMLDivElement | null>(null);
   const [status, setStatus] = useState<Status>("idle");
-
-  useEffect(() => {
-    if (reduced || isMobile) return;
-    const section = heroRef.current;
-    const copy = heroCopyRef.current;
-    if (!section || !copy) return;
-
-    gsap.registerPlugin(ScrollTrigger);
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: "top top",
-          end: "+=65%",
-          pin: true,
-          scrub: 0.7,
-        },
-      });
-      tl.to(copy, { yPercent: -8, autoAlpha: 0, filter: "blur(6px)", ease: "none" }, 0);
-    }, section);
-
-    const refresh = () => ScrollTrigger.refresh();
-    const settle = window.setTimeout(refresh, 2200);
-    window.addEventListener("load", refresh);
-    return () => {
-      window.clearTimeout(settle);
-      window.removeEventListener("load", refresh);
-      ctx.revert();
-    };
-  }, [isMobile, reduced]);
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -126,7 +89,7 @@ export default function KgmHome() {
 
   return (
     <>
-      <section ref={heroRef} id="accueil" className="relative min-h-[92svh] overflow-hidden pt-20">
+      <section id="accueil" className="relative min-h-[92svh] overflow-hidden pt-20">
         <Image
           src="/assets/kgm-hero-home-care.png"
           alt="Soignante accompagnant une personne âgee à domicile"
@@ -139,7 +102,7 @@ export default function KgmHome() {
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(251,252,250,0.78)_0%,rgba(251,252,250,0.38)_42%,rgba(251,252,250,0.94)_100%)] md:hidden" />
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-paper to-transparent" />
 
-        <div ref={heroCopyRef} className="relative z-10 mx-auto flex min-h-[82svh] w-full max-w-7xl flex-col justify-center px-6 pb-16 pt-8 md:px-10">
+        <div className="relative z-10 mx-auto flex min-h-[82svh] w-full max-w-7xl flex-col justify-center px-6 pb-16 pt-8 md:px-10">
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -183,7 +146,7 @@ export default function KgmHome() {
             <MagneticButton href="#evaluation">Demander une évaluation gratuite</MagneticButton>
             <a
               href="#services"
-              className="rounded-full border border-night/15 bg-white/70 px-6 py-3 text-center font-display text-sm font-medium text-night backdrop-blur transition hover:border-brand-300 hover:text-brand-700"
+              className="rounded-full border border-night/15 bg-white/85 px-6 py-3 text-center font-display text-sm font-medium text-night transition hover:border-brand-300 hover:text-brand-700"
             >
               Voir les services
             </a>
@@ -244,9 +207,9 @@ export default function KgmHome() {
                 transition={{ duration: 0.55, delay: index * 0.06 }}
                 className="rounded-lg border border-brand-100 bg-paper p-7 shadow-card"
               >
-                <div className="flex items-start justify-between gap-5">
-                  <h3 className="font-display text-2xl font-semibold text-night">{service.title}</h3>
-                  <span className="shrink-0 rounded-full bg-sage-100 px-3 py-1 font-body text-xs font-semibold text-sage-600">
+                <div className="flex min-w-0 flex-col items-start gap-3 sm:flex-row sm:justify-between sm:gap-5">
+                  <h3 className="min-w-0 font-display text-2xl font-semibold text-night">{service.title}</h3>
+                  <span className="max-w-full rounded-full bg-sage-100 px-3 py-1 font-body text-xs font-semibold leading-tight text-sage-600 sm:shrink-0">
                     {service.label}
                   </span>
                 </div>
